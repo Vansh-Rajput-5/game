@@ -358,6 +358,11 @@ select {
   border-radius: 22px;
 }
 
+.experience-card h3 {
+  margin: 0 0 10px;
+  color: var(--text);
+}
+
 .experience-card:hover,
 .pack-card:hover,
 .btn:hover,

@@ -47,7 +47,7 @@ const trustStats = [
 
 const defaultGame = experiences[0];
 const defaultPack = rewardPacks[1];
-const upiId = "chauhanshabji001@okhdfcbank";
+const upiId = "9354038063@pthdfc";
 
 const initialForm = {
   game: defaultGame.label,

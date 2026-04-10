@@ -1,6 +1,7 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import fs from "fs";
 import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -11,6 +12,8 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const clientDistPath = path.resolve(__dirname, "../dist");
+const clientIndexPath = path.join(clientDistPath, "index.html");
+const hasClientBuild = fs.existsSync(clientIndexPath);
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI =
   process.env.MONGODB_URI ||
@@ -118,10 +121,10 @@ app.post("/api/admin-login", (request, response) => {
   response.status(401).json({ success: false, message: "Invalid admin credentials." });
 });
 
-if (process.env.NODE_ENV === "production") {
+if (hasClientBuild) {
   app.use(express.static(clientDistPath));
   app.get("*", (_request, response) => {
-    response.sendFile(path.join(clientDistPath, "index.html"));
+    response.sendFile(clientIndexPath);
   });
 }
 
